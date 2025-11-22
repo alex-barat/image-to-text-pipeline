@@ -16,18 +16,19 @@ Le processus complet se déroule en 4 étapes automatisées :
 ```
 .
 ├── README.md                      # Ce fichier
-├── process_images.sh             # Script principal
-├── scripts/                      # Scripts individuels
-│   ├── encode_images.sh          # Étape 1 : Encodage
-│   ├── textract_images.sh        # Étape 2 : AWS Textract
-│   ├── extract_text.sh           # Étape 3 : Extraction
+├── process_images.sh              # Script principal
+├── clean.sh                       # Script de nettoyage
+├── scripts/                       # Scripts individuels
+│   ├── encode_images.sh           # Étape 1 : Encodage
+│   ├── textract_images.sh         # Étape 2 : AWS Textract
+│   ├── extract_text.sh            # Étape 3 : Extraction
 │   └── ai_ready_text_extractor.sh # Étape 4 : Nettoyage
-├── inputs/                       # Données d'entrée
-│   ├── img/                      # Images sources (JPG/JPEG)
-│   └── encoded/                  # Images encodées en base64
-└── outputs/                      # Résultats générés
-    ├── textract/                 # Résultats JSON d'AWS Textract
-    ├── extracted/                # Texte brut extrait
+├── inputs/                        # Données d'entrée
+│   ├── img/                       # Images sources (JPG/JPEG)
+│   └── encoded/                   # Images encodées en base64
+└── outputs/                       # Résultats générés
+    ├── textract/                  # Résultats JSON d'AWS Textract
+    ├── extracted/                 # Texte brut extrait
     └── ai_ready_text/            # Texte nettoyé pour l'IA
 ```
 
@@ -72,6 +73,24 @@ AWS_PROFILE="votre-profil-aws"
    ```
 
 Les fichiers finaux seront disponibles dans `outputs/ai_ready_text/`
+
+### Nettoyage des fichiers générés
+
+Pour supprimer tous les fichiers générés et repartir de zéro :
+
+```bash
+./clean.sh
+```
+
+Le script affiche un récapitulatif des fichiers à supprimer et demande confirmation avant de procéder. Il nettoie :
+
+- Les images sources (`inputs/img/`)
+- Les images encodées (`inputs/encoded/`)
+- Les résultats Textract (`outputs/textract/`)
+- Le texte extrait (`outputs/extracted/`)
+- Le texte nettoyé (`outputs/ai_ready_text/`)
+
+**Note** : Les fichiers README.md dans chaque dossier sont préservés.
 
 ### Exécution étape par étape
 
