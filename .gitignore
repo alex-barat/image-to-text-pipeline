@@ -1,7 +1,12 @@
 # Dossiers de données et résultats
-inputs/encoded/
-inputs/img/
-outputs/
+inputs/encoded/*.txt
+inputs/img/*.jpg
+inputs/img/*.jpeg
+inputs/img/*.JPG
+inputs/img/*.JPEG
+outputs/textract/
+outputs/extracted/
+outputs/ai_ready_text/
 
 # Fichiers système macOS
 .DS_Store
