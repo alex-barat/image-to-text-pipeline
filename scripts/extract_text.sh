@@ -1,17 +1,23 @@
 #!/bin/bash
 # extract_text.sh
 
+# Couleurs
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+NC='\033[0m'
+
 # Fonction pour traiter un seul fichier JSON
 process_textract_json() {
     local input_file="$1"
     local output_file="$2"
     
-    echo "Traitement de $input_file..."
+    echo -e "${CYAN}Traitement de${NC} $input_file..."
     
     # Extraire seulement les blocs de type LINE et leur texte
     jq -r '.Blocks[] | select(.BlockType == "LINE") | .Text' "$input_file" > "$output_file"
     
-    echo "Texte extrait dans $output_file"
+    echo -e "${GREEN}✓ Texte extrait dans${NC} ${YELLOW}$output_file${NC}"
 }
 
 # Traiter un seul fichier
@@ -36,4 +42,4 @@ for json_file in "$INPUT_DIR"/*.json; do
     fi
 done
 
-echo "Traitement terminé. Fichiers texte dans $OUTPUT_DIR"
+echo -e "${GREEN}Traitement terminé.${NC} Fichiers texte dans ${YELLOW}$OUTPUT_DIR${NC}"

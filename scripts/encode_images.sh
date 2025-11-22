@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Couleurs
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+NC='\033[0m'
+
 # Créer le dossier encoded s'il n'existe pas
 mkdir -p inputs/encoded
 
@@ -17,10 +23,10 @@ for file in inputs/img/*.{jpg,jpeg,JPG,JPEG}; do
     # Encoder en base64 et sauvegarder avec un nom simple
     base64 -i "$file" -o "inputs/encoded/${counter}.txt"
     
-    echo "Encodé: $filename -> inputs/encoded/${counter}.txt"
+    echo -e "${GREEN}✓${NC} Encodé: ${CYAN}$filename${NC} -> ${YELLOW}inputs/encoded/${counter}.txt${NC}"
     
     # Incrémenter le compteur
     counter=$((counter + 1))
 done
 
-echo "Encodage terminé!"
+echo -e "${GREEN}Encodage terminé!${NC}"

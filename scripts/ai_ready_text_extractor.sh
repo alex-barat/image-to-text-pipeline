@@ -1,11 +1,17 @@
 #!/bin/bash
 # ai_ready_text_extractor.sh
 
+# Couleurs
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+NC='\033[0m'
+
 clean_text_for_ai() {
     local input_file="$1"
     local output_file="$2"
     
-    echo "Nettoyage du texte pour IA : $input_file"
+    echo -e "${CYAN}Nettoyage du texte pour IA :${NC} $input_file"
     
     # Ajouter les métadonnées et le contenu
     {
@@ -20,7 +26,7 @@ clean_text_for_ai() {
     # Statistiques
     local line_count=$(wc -l < "$output_file")
     local word_count=$(wc -w < "$output_file")
-    echo "  → $line_count lignes, $word_count mots extraits"
+    echo -e "  ${GREEN}→${NC} $line_count lignes, $word_count mots extraits"
 }
 
 # Configuration
@@ -29,9 +35,9 @@ OUTPUT_DIR="${2:-outputs/ai_ready_text}"
 
 mkdir -p "$OUTPUT_DIR"
 
-echo "=== EXTRACTION DE TEXTE POUR IA ==="
-echo "Dossier source: $INPUT_DIR"
-echo "Dossier destination: $OUTPUT_DIR"
+echo -e "${CYAN}=== EXTRACTION DE TEXTE POUR IA ===${NC}"
+echo -e "${YELLOW}Dossier source:${NC} $INPUT_DIR"
+echo -e "${YELLOW}Dossier destination:${NC} $OUTPUT_DIR"
 echo ""
 
 # Traiter tous les fichiers
@@ -51,6 +57,6 @@ for json_file in "$INPUT_DIR"/*.txt; do
 done
 
 echo ""
-echo "=== RÉSUMÉ ==="
-echo "Fichiers traités: $processed_files/$total_files"
-echo "Fichiers texte générés dans: $OUTPUT_DIR"
+echo -e "${CYAN}=== RÉSUMÉ ===${NC}"
+echo -e "${GREEN}Fichiers traités:${NC} $processed_files/$total_files"
+echo -e "${YELLOW}Fichiers texte générés dans:${NC} $OUTPUT_DIR"
